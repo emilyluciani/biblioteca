@@ -1,4 +1,5 @@
 package model;
 
-public class Multavel {
+public interface Multavel {
+    double calcularMulta();
 }
