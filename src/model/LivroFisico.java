@@ -4,6 +4,10 @@ public class LivroFisico extends Livro implements Multavel{
     private double valorMultaPorDia;
     private String isbn;
 
+    public LivroFisico(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
+        super(titulo, autor, disponivel, numeroPaginas, idioma);
+    }
+
     public String getIsbn() {
         return isbn;
     }
