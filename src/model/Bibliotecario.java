@@ -15,4 +15,10 @@ public class Bibliotecario extends Pessoa {
     public void setCodFuncionario(String codFuncionario) {
         this.codFuncionario = codFuncionario;
     }
+
+    @Override
+    public int getLimiteEmprestimos(){
+        return 5;
+    }
+
 }
