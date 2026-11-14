@@ -17,7 +17,7 @@ public class Emprestimo implements Serializable {
 
     public Emprestimo(Usuario usuario, Livro livro) {
         this.data = LocalDate.now().format(FORMATO);
-        this.prazo = livro.getPrazo();
+        this.prazo = livro.getPrazoEmprestimoDias();
         this.usuario = usuario;
         this.livro = livro;
         this.status = true;

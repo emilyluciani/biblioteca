@@ -1,5 +1,14 @@
-package model;
+import model.*;
 
+import model.ApiLivros;
+import model.Biblioteca;
+import  model.Bibliotecario;
+import model.Ebook;
+import model.Emprestimo;
+import model.Livro;
+import model.LivroFisico;
+import model.Persistencia;
+import model.Revista;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -96,7 +105,7 @@ public class Main {
         System.out.println("18 - Editar usuário");
         System.out.println("19 - Editar bibliotecário");
         System.out.println("--- Internet ---");
-        System.out.println("20 - Cadastrar livro pela internet (API), em inglês (pois estamos em uma GlobalClass)");
+        System.out.println("20 - Consultar livro pela internet (API), em inglês (pois estamos em uma GlobalClass)");
         System.out.println(" 0 - Sair");
     }
 
@@ -432,7 +441,6 @@ public class Main {
                 + " | " + situacao
                 + " | limite: " + l.getLimiteEmprestimos()
                 + " | prazoEmprestimoDias: " + l.getPrazoEmprestimoDias()
-                + " | getPrazo(): " + l.getPrazo()
                 + extra;
     }
 
