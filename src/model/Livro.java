@@ -6,6 +6,7 @@ public abstract class Livro {
     private boolean disponivel;
     private int numeroPaginas;
     private String idioma;
+    private int prazo;
 
     public Livro(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
         this.titulo = titulo;
@@ -14,6 +15,12 @@ public abstract class Livro {
         this.numeroPaginas = numeroPaginas;
         this.idioma = idioma;
     }
+
+    public abstract int getLimiteEmprestimos();
+
+    public boolean isDisponivel() { return disponivel; }
+    public void setDisponivel(boolean disponivel) { this.disponivel = disponivel; }
+    public int getPrazo() { return prazo; }
 
     public String getTitulo() {
         return titulo;
@@ -49,12 +56,6 @@ public abstract class Livro {
 
     public abstract int getPrazoEmprestimoDias();
 
-    public int getPrazo() {
-        return getPrazoEmprestimoDias();
-    }
 
-    public boolean estaDisponivel() {
-        return disponivel;
-    }
 
 }
