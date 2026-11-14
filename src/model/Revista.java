@@ -16,4 +16,19 @@ public class Revista extends Livro implements Multavel {
     public void setIssn(String issn) {
         this.issn = issn;
     }
+
+    @Override
+    public int getPrazoEmprestimoDias () {
+        return 5;
+    }
+
+    @Override
+    public double calcularMulta () {
+        return calcularMulta(1);
+    }
+
+    @Override
+    public double calcularMulta (int diasAtraso) {
+        return diasAtraso * VALOR_MULTA_POR_DIA;
+    }
 }

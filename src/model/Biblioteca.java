@@ -44,14 +44,5 @@ public class Biblioteca {
         return resultado;
     }
 
-    public Livro buscarPorIsbn(String isbn) {
-        for (Livro livro : livros) {
-            if (isbn.equals(livro.getIsbn())) {
-                return livro;
-            }
-        }
-        return null;
-    }
-
 
 }
