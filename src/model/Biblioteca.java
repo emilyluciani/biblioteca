@@ -1,10 +1,9 @@
 package model;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Biblioteca {
+public class Biblioteca implements Serializable {
     private List<Livro> livros;
     private List<Usuario> usuarios;
     private List<Emprestimo> emprestimos;
@@ -56,15 +55,15 @@ public class Biblioteca {
         return total;
     }
 
-    public String emprestar(Usuario usuario, Livro livro) {
+    public String emprestar(Usuario usuario, Livro livro) throws RegistroNaoEncontradoException, LivroIndisponivelException, LimiteEmprestimosException {
         if (!usuarios.contains(usuario)) {
-            return "Usuário não cadastrado.";
+            throw new RegistroNaoEncontradoException("Usuário não cadastrado.");
         } else if (!livros.contains(livro)) {
-            return "Livro não cadastrado.";
+            throw new RegistroNaoEncontradoException("Livro não cadastrado.");
         } else if (!livro.isDisponivel()) {
-            return "Livro indisponível.";
+            throw new LivroIndisponivelException("Livro indisponível.");
         } else if (contarAtivosDoTipo(usuario, livro) >= livro.getLimiteEmprestimos()) {
-            return "Usuário atingiu o limite de empréstimos para este tipo.";
+            throw new LimiteEmprestimosException("Usuário atingiu o limite de empréstimos para este tipo.");
         } else {
             Emprestimo emprestimo = new Emprestimo(usuario, livro);
             emprestimos.add(emprestimo);
@@ -74,18 +73,17 @@ public class Biblioteca {
         }
     }
 
-    public String devolver(Usuario usuario, Livro livro) {
+    public String devolver(Usuario usuario, Livro livro) throws RegistroNaoEncontradoException {
         for (int i = 0; i < emprestimos.size(); i++) {
             Emprestimo e = emprestimos.get(i);
 
             if (e.getUsuario() == usuario && e.getLivro() == livro && e.getStatus()) {
-                e.setStatus(false);
-                e.setDataDevolucao(LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                e.registrarDevolucao();
                 livro.setDisponivel(true);
                 return "Devolução realizada com sucesso.";
             }
         }
-        return "Empréstimo ativo não encontrado.";
+        throw new RegistroNaoEncontradoException("Empréstimo ativo não encontrado.");
     }
 
 }

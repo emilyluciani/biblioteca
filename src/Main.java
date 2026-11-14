@@ -6,11 +6,13 @@ import java.util.Scanner;
 
 public class Main {
     private static final Scanner sc = new Scanner(System.in);
-    private static final Biblioteca biblioteca = new Biblioteca();
-    private static final List<Bibliotecario> bibliotecarios = new ArrayList<>();
+    private static Biblioteca biblioteca = new Biblioteca();
+    private static List<Bibliotecario> bibliotecarios = new ArrayList<>();
+    private static Persistencia persistencia = new Persistencia();
     private static final ApiLivros api = new ApiLivros();
 
     public static void main(String[] args) {
+        carregarDados();
         int opcao;
         do {
             exibirMenu();
@@ -41,10 +43,31 @@ public class Main {
                     case 0: System.out.println("Encerrando..."); break;
                     default: System.out.println("Opção inválida.");
                 }
+                salvarDados();
             } catch (Exception e) {
                 System.out.println("ERRO durante o teste: " + e);
             }
         } while (opcao != 0);
+    }
+
+    @SuppressWarnings("unchecked")
+    private static void carregarDados() {
+        try {
+            biblioteca = (Biblioteca) persistencia.carregar("biblioteca.dat");
+            bibliotecarios = (List<Bibliotecario>) persistencia.carregar("bibliotecarios.dat");
+            System.out.println("Dados carregados dos arquivos.");
+        } catch (Exception e) {
+            System.out.println("Nenhum dado salvo encontrado. Começando do zero.");
+        }
+    }
+
+    private static void salvarDados() {
+        try {
+            persistencia.salvar(biblioteca, "biblioteca.dat");
+            persistencia.salvar(bibliotecarios, "bibliotecarios.dat");
+        } catch (Exception e) {
+            System.out.println("Não foi possível salvar os dados: " + e.getMessage());
+        }
     }
 
     private static void exibirMenu() {
@@ -196,7 +219,15 @@ public class Main {
         if (usuario == null) return;
         Livro livro = escolherLivro();
         if (livro == null) return;
-        System.out.println(biblioteca.emprestar(usuario, livro));
+        try {
+            System.out.println(biblioteca.emprestar(usuario, livro));
+        } catch (RegistroNaoEncontradoException e) {
+            System.out.println("Não encontrado: " + e.getMessage());
+        } catch (LivroIndisponivelException e) {
+            System.out.println("Indisponível: " + e.getMessage());
+        } catch (LimiteEmprestimosException e) {
+            System.out.println("Limite atingido: " + e.getMessage());
+        }
     }
 
     private static void devolver() {
@@ -204,7 +235,11 @@ public class Main {
         if (usuario == null) return;
         Livro livro = escolherLivro();
         if (livro == null) return;
-        System.out.println(biblioteca.devolver(usuario, livro));
+        try {
+            System.out.println(biblioteca.devolver(usuario, livro));
+        } catch (RegistroNaoEncontradoException e) {
+            System.out.println("Não encontrado: " + e.getMessage());
+        }
     }
 
     private static void detalhesEmprestimo() {
@@ -378,6 +413,12 @@ public class Main {
 
 
     private static String descreverLivro(Livro l) {
+        String situacao;
+        if (l.isDisponivel()) {
+            situacao = "Disponível";
+        } else {
+            situacao = "Emprestado";
+        }
         String extra = "";
         if (l instanceof LivroFisico) {
             extra = " | ISBN: " + ((LivroFisico) l).getIsbn();
@@ -388,7 +429,7 @@ public class Main {
         }
         return l.getClass().getSimpleName() + " | " + l.getTitulo() + " | " + l.getAutor()
                 + " | " + l.getNumeroPaginas() + " págs | " + l.getIdioma()
-                + " | disponível: " + l.isDisponivel()
+                + " | " + situacao
                 + " | limite: " + l.getLimiteEmprestimos()
                 + " | prazoEmprestimoDias: " + l.getPrazoEmprestimoDias()
                 + " | getPrazo(): " + l.getPrazo()
