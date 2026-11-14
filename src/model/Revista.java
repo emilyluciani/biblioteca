@@ -31,4 +31,10 @@ public class Revista extends Livro implements Multavel {
     public double calcularMulta (int diasAtraso) {
         return diasAtraso * VALOR_MULTA_POR_DIA;
     }
+
+    @Override
+    public int getLimiteEmprestimos() {
+        return 2;
+    }
 }
+

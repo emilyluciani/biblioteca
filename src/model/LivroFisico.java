@@ -27,8 +27,14 @@ public class LivroFisico extends Livro implements Multavel{
     }
 
     @Override
-    public double calcularMulta(int diasAtraso) {
-        return diasAtraso * valorMultaPorDia;
+    public int getLimiteEmprestimos() {
+        return 2;
     }
 
+    private static final double VALOR_MULTA_POR_DIA = 1.00;
+
+    @Override
+    public double calcularMulta(int diasAtraso) {
+        return diasAtraso * VALOR_MULTA_POR_DIA;
+    }
 }

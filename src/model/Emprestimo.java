@@ -21,6 +21,10 @@ public class Emprestimo {
         this.livro = livro;
         this.status = true;
     }
+
+    public void setStatus(boolean status) { this.status = status; }
+    public void setDataDevolucao(String dataDevolucao) { this.dataDevolucao = dataDevolucao; }
+
     public boolean getStatus() {
         return status;
     }

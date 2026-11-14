@@ -26,8 +26,8 @@ public class Ebook extends Livro{
     }
 
     @Override
-    public boolean estaDisponivel() {
-        return true;
+    public int getLimiteEmprestimos() {
+        return 2;
     }
 
 }
