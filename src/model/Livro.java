@@ -1,12 +1,12 @@
 package model;
+import java.io.Serializable;
 
-public abstract class Livro {
+public abstract class Livro implements Serializable {
     private String titulo;
     private String autor;
     private boolean disponivel;
     private int numeroPaginas;
     private String idioma;
-    private int prazo;
 
     public Livro(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
         this.titulo = titulo;
@@ -20,7 +20,7 @@ public abstract class Livro {
 
     public boolean isDisponivel() { return disponivel; }
     public void setDisponivel(boolean disponivel) { this.disponivel = disponivel; }
-    public int getPrazo() { return prazo; }
+    public int getPrazo() { return getPrazoEmprestimoDias(); }
 
     public String getTitulo() {
         return titulo;

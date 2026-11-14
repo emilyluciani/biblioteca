@@ -3,8 +3,9 @@ package model;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.io.Serializable;
 
-public class Emprestimo {
+public class Emprestimo implements Serializable {
     private static final DateTimeFormatter FORMATO = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     private String data;
