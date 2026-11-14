@@ -8,6 +8,7 @@ public class Main {
     private static final Scanner sc = new Scanner(System.in);
     private static final Biblioteca biblioteca = new Biblioteca();
     private static final List<Bibliotecario> bibliotecarios = new ArrayList<>();
+    private static final ApiLivros api = new ApiLivros();
 
     public static void main(String[] args) {
         int opcao;
@@ -36,6 +37,7 @@ public class Main {
                     case 17: editarLivro(); break;
                     case 18: editarUsuario(); break;
                     case 19: editarBibliotecario(); break;
+                    case 20: cadastrarLivroPelaApi(); break;
                     case 0: System.out.println("Encerrando..."); break;
                     default: System.out.println("Opção inválida.");
                 }
@@ -61,15 +63,17 @@ public class Main {
         System.out.println("10 - Buscar livro por título");
         System.out.println("--- Empréstimos ---");
         System.out.println("11 - Emprestar");
-        System.out.println("12 - Devolver (Biblioteca.devolver)");
+        System.out.println("12 - Devolver");
         System.out.println("13 - Detalhes de um empréstimo");
-        System.out.println("14 - Registrar devolução direta (Emprestimo.registrarDevolucao)");
-        System.out.println("15 - Testar multa (Multavel)");
+        System.out.println("14 - Registrar devolução direta");
+        System.out.println("15 - Testar multa");
         System.out.println("--- Pessoas / edição ---");
         System.out.println("16 - Dados do usuário (limite, empréstimos ativos)");
         System.out.println("17 - Editar livro");
         System.out.println("18 - Editar usuário");
         System.out.println("19 - Editar bibliotecário");
+        System.out.println("--- Internet ---");
+        System.out.println("20 - Cadastrar livro pela internet (API), em inglês (pois estamos em uma GlobalClass)");
         System.out.println(" 0 - Sair");
     }
 
@@ -131,6 +135,18 @@ public class Main {
         String cod = lerTexto("Código de funcionário: ");
         bibliotecarios.add(new Bibliotecario(nome, cpf, email, cod));
         System.out.println("Bibliotecário cadastrado.");
+    }
+
+    private static void cadastrarLivroPelaApi() {
+        System.out.println("-- Novo livro pela internet --");
+        String titulo = lerTexto("Título para buscar: ");
+        try {
+            LivroFisico livro = api.buscarPorTitulo(titulo);
+            biblioteca.cadastrarLivro(livro);
+            System.out.println("Livro cadastrado: " + descreverLivro(livro));
+        } catch (Exception e) {
+            System.out.println("Não foi possível buscar o livro: " + e.getMessage());
+        }
     }
 
 
