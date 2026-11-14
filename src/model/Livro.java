@@ -1,6 +1,6 @@
 package model;
 
-public class Livro {
+public abstract class Livro {
     private String titulo;
     private String autor;
     private boolean disponivel;
@@ -44,14 +44,6 @@ public class Livro {
     }
 
     public void setIdioma(String idioma) {
-        this.idioma = idioma;
-    }
-
-    public Livro(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
-        this.titulo = titulo;
-        this.autor = autor;
-        this.disponivel = disponivel;
-        this.numeroPaginas = numeroPaginas;
         this.idioma = idioma;
     }
 

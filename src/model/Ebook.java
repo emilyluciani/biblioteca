@@ -4,6 +4,10 @@ public class Ebook extends Livro{
     private String formato;
     private String isbn;
 
+    public Ebook(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
+        super(titulo, autor, disponivel, numeroPaginas, idioma);
+    }
+
     public String getFormato() {
         return formato;
     }
