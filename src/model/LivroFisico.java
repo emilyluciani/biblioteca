@@ -18,7 +18,7 @@ public class LivroFisico extends Livro implements Multavel{
     }
 
     @Override
-    public double calcularMulta() { // exigido pela interface atual (multa de 1 dia)
+    public double calcularMulta() {
         return calcularMulta(1);
     }
 

@@ -7,6 +7,14 @@ public class Livro {
     private int numeroPaginas;
     private String idioma;
 
+    public Livro(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.disponivel = disponivel;
+        this.numeroPaginas = numeroPaginas;
+        this.idioma = idioma;
+    }
+
     public String getTitulo() {
         return titulo;
     }
