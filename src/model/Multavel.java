@@ -1,5 +1,6 @@
 package model;
 
 public interface Multavel {
-    double calcularMulta(int dias);
+    double calcularMulta();
+    double calcularMulta(int diasAtraso);
 }

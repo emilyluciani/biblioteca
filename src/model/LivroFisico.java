@@ -30,5 +30,5 @@ public class LivroFisico extends Livro implements Multavel{
     public double calcularMulta(int diasAtraso) {
         return diasAtraso * valorMultaPorDia;
     }
-}
+
 }
