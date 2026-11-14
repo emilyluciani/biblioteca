@@ -4,6 +4,10 @@ public class LivroFisico extends Livro implements Multavel{
     private double valorMultaPorDia;
     private String isbn;
 
+    public LivroFisico(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
+        super(titulo, autor, disponivel, numeroPaginas, idioma);
+    }
+
     public String getIsbn() {
         return isbn;
     }
@@ -18,7 +22,7 @@ public class LivroFisico extends Livro implements Multavel{
     }
 
     @Override
-    public double calcularMulta() { // exigido pela interface atual (multa de 1 dia)
+    public double calcularMulta() {
         return calcularMulta(1);
     }
 
