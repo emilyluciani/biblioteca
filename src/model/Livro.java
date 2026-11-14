@@ -47,6 +47,14 @@ public class Livro {
         this.idioma = idioma;
     }
 
+    public Livro(String titulo, String autor, boolean disponivel, int numeroPaginas, String idioma) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.disponivel = disponivel;
+        this.numeroPaginas = numeroPaginas;
+        this.idioma = idioma;
+    }
+
     public abstract int getPrazoEmprestimoDias();
 
     public int getPrazo() {
