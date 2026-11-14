@@ -16,4 +16,14 @@ public class Ebook extends Livro{
         this.isbn = isbn;
     }
 
+    @Override
+    public int getPrazoEmprestimoDias() {
+        return 7;
+    }
+
+    @Override
+    public boolean estaDisponivel() {
+        return true;
+    }
+
 }
