@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
 public class Emprestimo {
@@ -37,6 +38,34 @@ public class Emprestimo {
             return livro;
     }
 
+    private LocalDate calcularDataPrevista() {
+        return LocalDate.parse(data, FORMATO).plusDays(prazo);
+    }
+
+    public String getDataPrevistaDevolucao() {
+        return calcularDataPrevista().format(FORMATO);
+    }
+
+    public boolean estaAtivo() {
+        return status;
+    }
+
+    public boolean estaAtrasado() {
+        return status && LocalDate.now().isAfter(calcularDataPrevista());
+    }
+
+    public void registrarDevolucao() {
+        this.status = false;
+        this.dataDevolucao = LocalDate.now().format(FORMATO);
+    }
+
+    public double calcularMulta() {
+        if (livro instanceof Multavel && estaAtrasado()) {
+            int dias = Period.between(calcularDataPrevista(), LocalDate.now()).getDays();
+            return ((Multavel) livro).calcularMulta(dias);
+        }
+        return 0;
+    }
 
 
 }
