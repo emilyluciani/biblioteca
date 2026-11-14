@@ -11,4 +11,20 @@ public class LivroFisico extends Livro implements Multavel{
     public void getIsbn(String isbn){
         this.isbn = isbn;
     }
+
+    @Override
+    public int getPrazoEmprestimoDias() {
+        return 14;
+    }
+
+    @Override
+    public double calcularMulta() { // exigido pela interface atual (multa de 1 dia)
+        return calcularMulta(1);
+    }
+
+    @Override
+    public double calcularMulta(int diasAtraso) {
+        return diasAtraso * valorMultaPorDia;
+    }
+}
 }

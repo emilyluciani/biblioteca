@@ -38,4 +38,15 @@ public class Livro {
     public void setIdioma(String idioma) {
         this.idioma = idioma;
     }
+
+    public abstract int getPrazoEmprestimoDias();
+
+    public int getPrazo() {
+        return getPrazoEmprestimoDias();
+    }
+
+    public boolean estaDisponivel() {
+        return disponivel;
+    }
+
 }
