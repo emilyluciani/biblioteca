@@ -34,4 +34,6 @@ public abstract class Pessoa {
     public String getEmail() {
         return email;
     }
+
+    public abstract int getLimiteEmprestimos();
 }

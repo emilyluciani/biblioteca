@@ -27,4 +27,24 @@ public class Usuario extends Pessoa {
     public void setEmprestimos(ArrayList<Emprestimo> emprestimos) {
         this.emprestimos = emprestimos;
     }
+
+    public void adicionarEmprestimo(Emprestimo emprestimo) {
+        emprestimos.add(emprestimo);
+    }
+
+    public int contarEmprestimosAtivos() {
+        int total = 0;
+        for (Emprestimo emprestimo : emprestimos) {
+            if (emprestimo.getStatus()) {
+                total += total;
+            }
+        }
+        return total;
+    }
+
+    @Override
+    public int getLimiteEmprestimos() {
+        return 3;
+    }
+
 }
