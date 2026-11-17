@@ -128,7 +128,7 @@ Consolidar conhecimentos em desenvolvimento backend com Java, aplicando conceito
 
 ---
 
-## 👤 Autor
+## 👤 Autores
 
 Emily Maria Luciani, Erika Kanashiro, Giovana Resnauer e Nathaly Abreu.
 
