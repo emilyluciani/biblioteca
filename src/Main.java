@@ -34,27 +34,27 @@ public class Main {
                     case 3: cadastrarRevista(); break;
                     case 4: cadastrarUsuario(); break;
                     case 5: cadastrarBibliotecario(); break;
-                    case 6: listarLivros(); break;
-                    case 7: listarUsuarios(); break;
-                    case 8: listarBibliotecarios(); break;
-                    case 9: listarEmprestimos(); break;
-                    case 10: buscarPorTitulo(); break;
-                    case 11: emprestar(); break;
-                    case 12: devolver(); break;
-                    case 13: detalhesEmprestimo(); break;
-                    case 14: registrarDevolucaoDireta(); break;
-                    case 15: testarMulta(); break;
-                    case 16: dadosUsuario(); break;
-                    case 17: editarLivro(); break;
-                    case 18: editarUsuario(); break;
-                    case 19: editarBibliotecario(); break;
-                    case 20: cadastrarLivroPelaApi(); break;
+                    case 6: cadastrarLivroPelaApi(); break;
+                    case 7: listarLivros(); break;
+                    case 8: listarUsuarios(); break;
+                    case 9: listarBibliotecarios(); break;
+                    case 10: listarEmprestimos(); break;
+                    case 11: buscarPorTitulo(); break;
+                    case 12: emprestar(); break;
+                    case 13: devolver(); break;
+                    case 14: detalhesEmprestimo(); break;
+                    case 15: registrarDevolucaoDireta(); break;
+                    case 16: testarMulta(); break;
+                    case 17: dadosUsuario(); break;
+                    case 18: editarLivro(); break;
+                    case 19: editarUsuario(); break;
+                    case 20: editarBibliotecario(); break;
                     case 0: System.out.println("Encerrando..."); break;
                     default: System.out.println("Opção inválida.");
                 }
                 salvarDados();
             } catch (Exception e) {
-                System.out.println("ERRO durante o teste: " + e);
+                System.out.println("Erro inesperado: " + e);
             }
         } while (opcao != 0);
     }
@@ -87,25 +87,24 @@ public class Main {
         System.out.println(" 3 - Cadastrar revista");
         System.out.println(" 4 - Cadastrar usuário");
         System.out.println(" 5 - Cadastrar bibliotecário");
+        System.out.println(" 6 - Cadastrar livro pela internet em inglês (pois estamos em uma global class"); //API
         System.out.println("--- Listagens / busca ---");
-        System.out.println(" 6 - Listar livros");
-        System.out.println(" 7 - Listar usuários");
-        System.out.println(" 8 - Listar bibliotecários");
-        System.out.println(" 9 - Listar empréstimos");
-        System.out.println("10 - Buscar livro por título");
+        System.out.println(" 7 - Listar livros");
+        System.out.println(" 8 - Listar usuários");
+        System.out.println(" 9 - Listar bibliotecários");
+        System.out.println("10 - Listar empréstimos");
+        System.out.println("11 - Buscar livro por título");
         System.out.println("--- Empréstimos ---");
-        System.out.println("11 - Emprestar");
-        System.out.println("12 - Devolver");
-        System.out.println("13 - Detalhes de um empréstimo");
-        System.out.println("14 - Registrar devolução direta");
-        System.out.println("15 - Testar multa");
+        System.out.println("12 - Emprestar");
+        System.out.println("13 - Devolver");
+        System.out.println("14 - Detalhes de um empréstimo");
+        System.out.println("15 - Registrar devolução direta");
+        System.out.println("16 - Testar multa");
         System.out.println("--- Pessoas / edição ---");
-        System.out.println("16 - Dados do usuário (limite, empréstimos ativos)");
-        System.out.println("17 - Editar livro");
-        System.out.println("18 - Editar usuário");
-        System.out.println("19 - Editar bibliotecário");
-        System.out.println("--- Internet ---");
-        System.out.println("20 - Consultar livro pela internet (API), em inglês (pois estamos em uma GlobalClass)");
+        System.out.println("17 - Dados do usuário (limite, empréstimos ativos)");
+        System.out.println("18 - Editar livro");
+        System.out.println("19 - Editar usuário");
+        System.out.println("20 - Editar bibliotecário");
         System.out.println(" 0 - Sair");
     }
 
@@ -118,7 +117,7 @@ public class Main {
         String idioma = lerTexto("Idioma: ");
         String isbn = lerTexto("ISBN: ");
         LivroFisico livro = new LivroFisico(titulo, autor, true, paginas, idioma);
-        livro.getIsbn(isbn); // no código da classe, o "setter" do ISBN se chama getIsbn(String)
+        livro.setIsbn(isbn);
         biblioteca.cadastrarLivro(livro);
         System.out.println("Livro físico cadastrado.");
     }
@@ -131,7 +130,7 @@ public class Main {
         String idioma = lerTexto("Idioma: ");
         String isbn = lerTexto("ISBN: ");
         Ebook ebook = new Ebook(titulo, autor, true, paginas, idioma);
-        ebook.getIsbn(isbn); // mesmo caso do LivroFisico
+        ebook.setIsbn(isbn); // mesmo caso do LivroFisico
         biblioteca.cadastrarLivro(ebook);
         System.out.println("Ebook cadastrado.");
     }
@@ -316,9 +315,9 @@ public class Main {
                 if (l instanceof Revista) {
                     ((Revista) l).setIssn(lerTexto("Novo ISSN: "));
                 } else if (l instanceof LivroFisico) {
-                    ((LivroFisico) l).getIsbn(lerTexto("Novo ISBN: "));
+                    ((LivroFisico) l).setIsbn(lerTexto("Novo ISBN: "));
                 } else if (l instanceof Ebook) {
-                    ((Ebook) l).getIsbn(lerTexto("Novo ISBN: "));
+                    ((Ebook) l).setIsbn(lerTexto("Novo ISBN: "));
                 }
                 break;
             default: System.out.println("Opção inválida."); return;

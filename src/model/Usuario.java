@@ -36,7 +36,7 @@ public class Usuario extends Pessoa {
         int total = 0;
         for (Emprestimo emprestimo : emprestimos) {
             if (emprestimo.getStatus()) {
-                total += total;
+                total++;
             }
         }
         return total;
