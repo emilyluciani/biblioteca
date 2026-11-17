@@ -20,7 +20,6 @@ public abstract class Livro implements Serializable {
 
     public boolean isDisponivel() { return disponivel; }
     public void setDisponivel(boolean disponivel) { this.disponivel = disponivel; }
-    public int getPrazo() { return getPrazoEmprestimoDias(); }
 
     public String getTitulo() {
         return titulo;
