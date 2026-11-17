@@ -12,7 +12,7 @@ public class LivroFisico extends Livro implements Multavel{
         return isbn;
     }
 
-    public void getIsbn(String isbn){
+    public void setIsbn(String isbn){
         this.isbn = isbn;
     }
 
